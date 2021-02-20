@@ -10,7 +10,7 @@ type Props = {
     data: PostData
 }
 
-type PostData = {
+export type PostData = {
     title: string
     date: string
     slug: string
@@ -19,10 +19,10 @@ type PostData = {
 export const Post = ({ source, data }: Props) => {
     const content = hydrate(source)
     return (
-        <div className="wrapper">
-            <h1>{data.title}</h1>
+        <>
+            {data.title}
             {content}
-        </div>
+        </>
     )
 }
 

@@ -22,13 +22,3 @@ export const getPostAll = (): typeof posts => {
         .sort((m1, m2) => (dayjs(m1.data.date).isAfter(m2.data.date) ? -1 : 1))
     return posts
 }
-
-// export const getPostDataAll = (): PostData[]=> {
-//     return getPostAll().map((m)=>m.data)
-// }
-
-// export interface PostData {
-//     title: string;
-//     slug: string;
-//     date: string;
-// }
