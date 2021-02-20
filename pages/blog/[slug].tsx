@@ -1,14 +1,43 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import renderToString from 'next-mdx-remote/render-to-string'
+import hydrate from 'next-mdx-remote/hydrate'
+import { MdxRemote } from 'next-mdx-remote/types'
 
+import { getPostAll } from '../../src/logics/post'
 
-const getStaticPaths: GetStaticPaths = async () => {
-        return {
-            paths: ({
-                params: {
-                    post: ,
-                },
-            }),
-            fallback: false,
-        };
-};
-const getStaticProps: GetStaticProps = async () => {};
+type Props = {
+    source: MdxRemote.Source
+    data: PostData
+}
+
+type PostData = {
+    title: string
+    date: string
+    slug: string
+}
+
+export const Post = ({ source, data }: Props) => {
+    const content = hydrate(source)
+    return (
+        <div className="wrapper">
+            <h1>{data.title}</h1>
+            {content}
+        </div>
+    )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    return {
+        paths: getPostAll().map((m) => ({
+            params: {
+                slug: m.data.slug,
+            },
+        })),
+        fallback: false,
+    }
+}
+export const getStaticProps: GetStaticProps = async ({ params: slug }) => {
+    const { content, data } = getPostAll().find((m) => m.data.slug === slug)
+    const source = await renderToString(content)
+    return { props: { source, data } }
+}

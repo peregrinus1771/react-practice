@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
     env: {
         browser: true,
@@ -7,11 +8,9 @@ module.exports = {
         'eslint:recommended',
         'plugin:react/recommended',
         'plugin:react-hooks/recommended',
-        'plugin:@typescript-eslint/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin: @typescript-eslint/recommended',
-        'recommended-requiring-type-checking',
+        // 'recommended-requiring-type-checking',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -20,19 +19,20 @@ module.exports = {
         },
         ecmaVersion: 12,
         sourceType: 'module',
-        project: './tsconfig.json',
     },
     plugins: [
         'import',
         'simple-import-sort',
-        'jsx-ally',
+        'jsx-a11y',
         'react',
         'react-hooks',
         '@typescript-eslint',
-        'jest',
     ],
     ignorePatterns: ['node_modules', 'dist'],
     settings: { react: { version: 'detect' } },
     root: true,
-    rules: {},
+    rules: {
+        'react/react-in-jsx-scope': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+    },
 }
