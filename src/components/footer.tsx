@@ -10,11 +10,18 @@ export const Footer = (): JSX.Element => {
             : `${publishedYear} - ${thisYear}`
     return (
         <Container>
-            <small>@{year}falco</small>
+            <Copyright>@{year}falco</Copyright>
         </Container>
     )
 }
 
 const Container = styled.footer`
-    text-align: center;
+    margin-top: auto;
+    display: flex;
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid gray;
+    background-color: ${(props) => props.theme.bg.secondary};
 `
+const Copyright = styled.p``

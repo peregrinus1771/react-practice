@@ -1,17 +1,37 @@
-import {GetStaticProps} from 'next'
+import { GetStaticProps } from 'next'
 import { Profile, Posts } from '../src/components/index'
-import {getPostAll } from '../src/logics/post'
-import {PostData} from './blog/[slug]'
+import {
+    getPostDataAll,
+    PostData,
+} from '../src/logics/post'
+import styled from 'styled-components'
 
-export default function Home({ posts }: PostData) {
-    return (
-        <>
-            <Profile />
-            <Posts posts={posts} />
-        </>
-    )
+// export const config = {
+//     amp: true,
+// }
+
+interface Props {
+    posts: PostData[]
 }
 
-export const getStaticProps : GetStaticProps= async () => {
-    return{ props: {posts: getPostAll}}
+export default function Home({ posts }: Props) {
+    return (
+        <Container>
+            <Profile />
+            <Posts posts={posts} />
+        </Container>
+    )
+}
+const Container = styled.div`
+    width: 100vw;
+    max-width: 50rem;
+    padding: 10px;
+    flex-grow: 1;
+    @media (min-width: 768px) {
+        width: 75rem;
+    }
+`
+
+export const getStaticProps: GetStaticProps = async () => {
+    return { props: { posts: getPostDataAll() } }
 }
