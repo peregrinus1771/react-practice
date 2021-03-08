@@ -17,7 +17,6 @@ const Container = styled.header`
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
-    background-color: ${(props) => props.theme.bg.secondary};
     @media (min-width: 768px) {
         padding: 15px 30px;
     }

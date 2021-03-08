@@ -21,7 +21,5 @@ const Container = styled.footer`
     align-self: stretch;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid gray;
-    background-color: ${(props) => props.theme.bg.secondary};
 `
 const Copyright = styled.p``
