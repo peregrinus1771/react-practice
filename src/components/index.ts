@@ -1,0 +1,5 @@
+export { Header } from './header'
+export { Footer } from './footer'
+export { Posts } from './posts'
+export { Profile } from './profile'
+export { Head } from './head'
