@@ -75,8 +75,9 @@ const LogoContainer = styled.div`
     justify-content: center;
     height: 2rem;
     width: 2rem;
+    opacity: 0.6;
     color: ${(props) => props.theme.text.secondary};
     &:hover {
-        opacity: 0.6;
+        opacity: 1;
     }
 `

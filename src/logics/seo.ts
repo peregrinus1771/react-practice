@@ -1,15 +1,17 @@
+export const canonical ='https://Flik.dev'
+
 export const SEO = {
-    title: 'falco',
+    title: 'Flik',
     description: 'This is the blog',
-    canonical: '',
+    canonical: canonical,
     openGraph: {
         type: 'website',
-        url: 'https://www.url.ie/',
-        site_name: 'SiteName',
+        url: canonical,
+        site_name: 'Flik.dev',
         images: [
             {
-                url: 'https://www.url.ie/',
-                alt: 'SiteName',
+                url: canonical,
+                alt: 'Flik.dev',
             },
         ],
     },

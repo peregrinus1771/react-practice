@@ -3,10 +3,8 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
 import { PostData } from '../logics/post'
+import Image from 'next/image'
 import styled from 'styled-components'
-
-
-
 
 export function Posts({ posts }: { posts: PostData[] }) {
     return (
@@ -14,18 +12,23 @@ export function Posts({ posts }: { posts: PostData[] }) {
             {posts.flatMap((p) => (
                 <Article key={p.title}>
                     <Link href={`/blog/${p.slug}`}>
+                        <Image
+                            src={`../../documents/articles/2021/${p.date.slice(5,9)}/${p.thumbnail}`}
+                            alt={p.title}
+                            width="fill"
+                            height="fill"
+                        />
                         <Title>{p.title}</Title>
+                        <Description>{p.description}</Description>
+                        <Date>{dayjs(p.date).format('ll')}</Date>
                     </Link>
-                    <Description>{p.description}</Description>
-                    <Date>{dayjs(p.date).format('ll')}</Date>
                 </Article>
             ))}
         </Container>
     )
 }
 
-const Container = styled.div`
-`
+const Container = styled.div``
 
 const Article = styled.article`
     padding: 10px 15px;

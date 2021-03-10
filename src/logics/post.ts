@@ -12,8 +12,6 @@ export const getPostAll = (): typeof posts => {
             const yearPath = path.join(articlePath, year)
             return fs.readdirSync(yearPath).map((dirName) => {
                 const filePath = path.join(yearPath, dirName, 'text.mdx')
-                console.log(filePath);
-
                 return fs.readFileSync(filePath)
             })
         })
@@ -48,6 +46,7 @@ export type PostData = {
     description: string
     date: string
     slug: string
+    thumbnail: string
 }
 
 

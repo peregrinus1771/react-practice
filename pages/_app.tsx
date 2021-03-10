@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { useDarkMode } from '../src/logics/darkmode'
+import { useDarkMode } from '../src/styles/darkmode'
 import type { AppProps } from 'next/app'
 import { Head, Header, Footer } from '../src/components'
 import styled, { ThemeProvider } from 'styled-components'
@@ -38,5 +38,4 @@ const Container = styled.div`
     align-items: center;
     min-height: 100vh;
     transition:0.5s;
-    cubic-bezier(0.45,0.05,0.55,0.95);
 `

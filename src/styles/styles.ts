@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
-        
+
         margin: 0;
         padding:0;
         font-family: Arial,
@@ -35,7 +35,7 @@ export const DarkTheme = {
         secondary: '#27292D',
     },
     text: {
-        primary: '#FFFFFF',
-        secondary: '#FFFFFF',
+        primary: '#f0f6fc',
+        secondary: '#c9d1d9',
     },
 }
