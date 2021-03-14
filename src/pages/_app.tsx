@@ -1,11 +1,11 @@
 import { createContext } from 'react'
-import { useDarkMode } from '../src/styles/darkmode'
+import { useDarkMode } from '../styles/darkmode'
 import type { AppProps } from 'next/app'
-import { Head, Header, Footer } from '../src/components'
+import { Head, Header, Footer } from '../components'
 import styled, { ThemeProvider } from 'styled-components'
-import { GlobalStyle, LightTheme, DarkTheme } from '../src/styles/styles'
+import { GlobalStyle, LightTheme, DarkTheme } from '../styles/styles'
 import { DefaultSeo } from 'next-seo'
-import { SEO } from '../src/logics/seo'
+import { SEO } from '../logics/seo'
 
 export const ToggleContext = createContext(null)
 
