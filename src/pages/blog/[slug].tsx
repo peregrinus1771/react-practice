@@ -2,12 +2,12 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import renderToString from 'next-mdx-remote/render-to-string'
 import hydrate from 'next-mdx-remote/hydrate'
 import { MdxRemote } from 'next-mdx-remote/types'
-import { getPostAll, PostData, getReadingTime } from '../../src/logics/post'
-import { Profile } from '../../src/components/index'
-import { canonical } from '../../src/logics/seo'
+import { getPostAll, PostData, getReadingTime } from '../../logics/post'
+import { Profile } from '../../components/index'
+import { canonical } from '../../logics/seo'
 import { NextSeo } from 'next-seo'
 import styled from 'styled-components'
-import {Image } from '../../src/components/mdx/image'
+import {Image } from '../../components/mdx/image'
 
 interface Props {
     source: MdxRemote.Source

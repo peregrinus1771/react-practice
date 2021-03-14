@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
-import { Profile, Posts } from '../src/components/index'
+import { Profile, Posts } from '../components/index'
 import {
     getPostDataAll,
     PostData,
-} from '../src/logics/post'
+} from '../logics/post'
 import styled from 'styled-components'
 
 // export const config = {
