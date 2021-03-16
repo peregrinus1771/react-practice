@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-import { ToggleContext } from '../pages/_app'
 import { IoSunny, IoMoon } from 'react-icons/io5'
 import styled from 'styled-components'
 import {useToggleContext} from '../logics/store'

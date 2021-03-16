@@ -17,8 +17,9 @@ interface Props {
 
 const components = {
     Image: () => {
+        return
         <Image
-            src="../../documents/articles/2021/2-28/main.png"
+            src="../../../documents/articles/2021/2-28/main.png"
             alt="alinaeo"
         />
     },

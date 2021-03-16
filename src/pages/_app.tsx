@@ -1,13 +1,11 @@
-import { createContext } from 'react'
-import { useDarkMode } from '../styles/darkmode'
 import type { AppProps } from 'next/app'
+import { useDarkMode } from '../styles/darkmode'
+import { ToggleContext } from '../logics/store'
 import { Head, Header, Footer } from '../components'
 import styled, { ThemeProvider } from 'styled-components'
 import { GlobalStyle, LightTheme, DarkTheme } from '../styles/styles'
 import { DefaultSeo } from 'next-seo'
 import { SEO } from '../logics/seo'
-
-export const ToggleContext = createContext(null)
 
 export default function App({ Component, pageProps }: AppProps) {
     const [theme, setTheme, mountedComponent] = useDarkMode()
@@ -37,5 +35,5 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    transition:0.5s;
+    transition: 0.5s;
 `
