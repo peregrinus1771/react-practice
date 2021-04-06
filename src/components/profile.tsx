@@ -1,12 +1,21 @@
-import { sns } from '../logics/sns'
+import { sns } from '../lib/sns'
 import styled from 'styled-components'
 import { IoLogoGithub, IoLogoTwitter, IoLogoLinkedin } from 'react-icons/io5'
+import Image from 'next/image'
 
 export const Profile = () => {
     return (
         <Container>
             <WhoIs>
-                <Selfie src="" />
+                <Selfie>
+                    <Image
+                        src="/articles/2021/3-15/thumbnail.png"
+                        alt="profile"
+                        width="32px"
+                        height="32px"
+                        layout="responsive"
+                    />
+                </Selfie>
                 <Author>
                     <Name>Flik</Name>
                     <Position>Frontend Developer</Position>
@@ -25,7 +34,7 @@ export const Profile = () => {
                 </a>
                 <a href={sns.twitter.link} target="_blank" rel="noreferrer">
                     <LogoContainer>
-                        <IoLogoTwitter size={28} color='inherit' />
+                        <IoLogoTwitter size={28} color="inherit" />
                     </LogoContainer>
                 </a>
             </SnsLink>
@@ -37,7 +46,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 `
 const WhoIs = styled.div`
     display: flex;
@@ -47,7 +56,7 @@ const WhoIs = styled.div`
         margin-bottom: 0;
     }
 `
-const Selfie = styled.img`
+const Selfie = styled.div`
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -64,6 +73,7 @@ const Position = styled.p`
 `
 const SnsLink = styled.div`
     display: flex;
+    align-items: center;
     @media (min-width: 768px) {
         justify-content: space-between;
         gap: 9px;

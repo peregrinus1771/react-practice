@@ -1,4 +1,4 @@
-export const canonical ='https://Flik.dev'
+export const canonical = 'https://Flik.dev'
 
 export const SEO = {
     title: 'Flik',

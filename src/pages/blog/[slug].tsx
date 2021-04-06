@@ -1,13 +1,16 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
+import type { GetStaticProps, GetStaticPaths } from 'next'
+import type { PostData } from '../../types/types'
 import renderToString from 'next-mdx-remote/render-to-string'
 import hydrate from 'next-mdx-remote/hydrate'
 import { MdxRemote } from 'next-mdx-remote/types'
-import { getPostAll, PostData, getReadingTime } from '../../logics/post'
+import { getPostAll, getReadingTime } from '../../lib/post'
 import { Profile } from '../../components/index'
-import { canonical } from '../../logics/seo'
+import { canonical } from '../../lib/seo'
 import { NextSeo } from 'next-seo'
 import styled from 'styled-components'
-import {Image } from '../../components/mdx/image'
+import { Layout } from '../../components/mdx/layout'
+import { CustomImage } from '../../components/mdx/customImage'
+
 
 interface Props {
     source: MdxRemote.Source
@@ -16,13 +19,8 @@ interface Props {
 }
 
 const components = {
-    Image: () => {
-        return
-        <Image
-            src="../../../documents/articles/2021/2-28/main.png"
-            alt="alinaeo"
-        />
-    },
+    Layout,
+    CustomImage,
 }
 
 export default function Post({ source, data, wpm }: Props) {
@@ -36,7 +34,7 @@ export default function Post({ source, data, wpm }: Props) {
                     url: `${canonical}/blog/${data.slug}`,
                     images: [
                         {
-                            url: data.thumbnail,
+                            url: `/articles/${data.imagePath}/thumbnail.png`,
                             alt: 'article thumbnail',
                         },
                     ],
@@ -84,14 +82,12 @@ const Content = styled.div`
 `
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    return {
-        paths: getPostAll().map((m) => ({
-            params: {
-                slug: m.data.slug,
-            },
-        })),
-        fallback: false,
-    }
+    const paths = getPostAll().map((m) => ({
+        params: {
+            slug: m.data.slug,
+        },
+    }))
+    return { paths, fallback: false }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {

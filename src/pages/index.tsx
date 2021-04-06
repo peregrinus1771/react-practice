@@ -1,14 +1,8 @@
 import { GetStaticProps } from 'next'
 import { Profile, Posts } from '../components/index'
-import {
-    getPostDataAll,
-    PostData,
-} from '../logics/post'
+import { getPostDataAll } from '../lib/post'
+import { PostData } from '../types/types'
 import styled from 'styled-components'
-
-// export const config = {
-//     amp: true,
-// }
 
 interface Props {
     posts: PostData[]

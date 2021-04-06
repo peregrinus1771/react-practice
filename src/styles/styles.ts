@@ -12,8 +12,6 @@ export const GlobalStyle = createGlobalStyle`
         padding:0;
         font-family: Arial,
         Helvetica, sans-serif;
-        color: ${(props) => props.theme.text.primary};
-        background-color: ${(props) => props.theme.bg.primary};
 
     }
 `

@@ -1,6 +1,7 @@
+import { ReactNode } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 
-export const Layout = (children) => {
+export const Layout = ({ children }: { children: ReactNode }) => {
     return (
         <>
             <GlobalStyle>{children}</GlobalStyle>

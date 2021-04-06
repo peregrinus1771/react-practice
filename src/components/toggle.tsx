@@ -1,6 +1,6 @@
 import { IoSunny, IoMoon } from 'react-icons/io5'
 import styled from 'styled-components'
-import {useToggleContext} from '../logics/store'
+import { useToggleContext } from '../lib/store'
 
 export const Toggle = () => {
     const { theme, setTheme } = useToggleContext()
@@ -13,7 +13,7 @@ export const Toggle = () => {
                 {theme === 'light' ? (
                     <IoSunny size={32} />
                 ) : (
-                    <IoMoon  size={32} />
+                    <IoMoon size={32} />
                 )}
             </Button>
         </>

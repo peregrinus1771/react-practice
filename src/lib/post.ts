@@ -27,26 +27,12 @@ export const getPostDataAll = () => {
     return getPostAll().map((m) => m.data)
 }
 
-export const getPostContentAll = () =>{
-    return  getPostAll().map((m) => m.content)
-
+export const getPostContentAll = () => {
+    return getPostAll().map((m) => m.content)
 }
-
-
 
 export const getReadingTime = (content) => {
     const wordCount = content.split(/\W+/).length
-    return Math.floor(wordCount / 200)
+    const wordsPerMinute = 200
+    return Math.floor(wordCount / wordsPerMinute)
 }
-
-
-
-export type PostData = {
-    title: string
-    description: string
-    date: string
-    slug: string
-    thumbnail: string
-}
-
-

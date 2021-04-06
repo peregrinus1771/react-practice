@@ -1,28 +1,33 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
-import { PostData } from '../logics/post'
-import Image from 'next/image'
+import { PostData } from '../types/types'
 import styled from 'styled-components'
 
 export function Posts({ posts }: { posts: PostData[] }) {
+
     return (
         <Container>
             {posts.flatMap((p) => (
-                <Article key={p.title}>
                     <Link href={`/blog/${p.slug}`}>
-                        <Image
-                            src={`../../documents/articles/2021/${p.date.slice(5,9)}/${p.thumbnail}`}
-                            alt={p.title}
-                            width="fill"
-                            height="fill"
-                        />
-                        <Title>{p.title}</Title>
-                        <Description>{p.description}</Description>
-                        <Date>{dayjs(p.date).format('ll')}</Date>
+                        <Article key={p.title}>
+                            <Left>
+                                <Image
+                                    src={`/articles/${p.imagePath}/thumbnail.png}`}
+                                    alt={p.title}
+                                    width="fill"
+                                    height="fill"
+                                />
+                            </Left>
+                            <Right>
+                                <Title>{p.title}</Title>
+                                <Description>{p.description}</Description>
+                                <Date>{dayjs(p.date).format('ll')}</Date>
+                            </Right>
+                        </Article>
                     </Link>
-                </Article>
             ))}
         </Container>
     )
@@ -31,6 +36,9 @@ export function Posts({ posts }: { posts: PostData[] }) {
 const Container = styled.div``
 
 const Article = styled.article`
+  display:flex;
+    flex-direction:row;
+    align-items:start;
     padding: 10px 15px;
     border: 1px solid gray;
 
@@ -38,6 +46,13 @@ const Article = styled.article`
         cursor: pointer;
     }
 `
+const Left = styled.div`
+`
+const Right = styled.div`
+`
+
+
+
 
 const Title = styled.h3`
     margin: 0;

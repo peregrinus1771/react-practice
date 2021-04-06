@@ -49,21 +49,20 @@ export function Code({
     )
 }
 
-
 const Pre = styled.pre`
-  padding: 1rem;
-  width: 100vw;
-  overflow: auto;
-`;
+    padding: 1rem;
+    width: 100vw;
+    overflow: auto;
+`
 
 const Line = styled.div<{ isHighlighted: boolean }>`
-  display: table-row;
-`;
+    display: table-row;
+`
 
 const HighlightedLineIndicator = styled.span<{ isHighlighted: boolean }>`
-  display: table-cell;
-`;
+    display: table-cell;
+`
 
 const LineContent = styled.span`
-  font-size: 1rem;
+    font-size: 1rem;
 `

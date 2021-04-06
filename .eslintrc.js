@@ -1,9 +1,10 @@
 // eslint-disable-next-line no-undef
 module.exports = {
     env: {
-        node:true,
+        node: true,
         browser: true,
         es2021: true,
+        jest: true,
     },
     extends: [
         'eslint:recommended',
@@ -11,6 +12,7 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/recommended',
+        'plugin:jest/recommended',
         // 'recommended-requiring-type-checking',
     ],
     parser: '@typescript-eslint/parser',
@@ -28,9 +30,13 @@ module.exports = {
         'react',
         'react-hooks',
         '@typescript-eslint',
+        'jest',
     ],
     ignorePatterns: ['node_modules', 'dist'],
-    settings: { react: { version: 'detect' } },
+    settings: {
+        react: { version: 'detect' },
+        jest: { version: 'detect' },
+    },
     root: true,
     rules: {
         'react/react-in-jsx-scope': 'off',
