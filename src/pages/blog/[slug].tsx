@@ -1,53 +1,43 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import type { PostData } from '../../types/types'
-import renderToString from 'next-mdx-remote/render-to-string'
-import hydrate from 'next-mdx-remote/hydrate'
-import { MdxRemote } from 'next-mdx-remote/types'
-import { getPostAll, getReadingTime } from '../../lib/post'
+import { getData, getReadingTime } from '../../utils/post'
 import { Profile } from '../../components/index'
-import { canonical } from '../../lib/seo'
+import { canonical } from '../../utils/seo'
 import { NextSeo } from 'next-seo'
 import styled from 'styled-components'
-import { Layout } from '../../components/mdx/layout'
-import { CustomImage } from '../../components/mdx/customImage'
-
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+dayjs.extend(localizedFormat)
 
 interface Props {
-    source: MdxRemote.Source
     data: PostData
-    wpm: number
 }
 
-const components = {
-    Layout,
-    CustomImage,
-}
-
-export default function Post({ source, data, wpm }: Props) {
-    const content = hydrate(source, { components })
+export default function Post({ data }: Props) {
+    // const wpm = getReadingTime(data.body)
     return (
         <Container>
             <NextSeo
                 title={data.title}
-                description={data.description}
-                openGraph={{
-                    url: `${canonical}/blog/${data.slug}`,
-                    images: [
-                        {
-                            url: `/articles/${data.imagePath}/thumbnail.png`,
-                            alt: 'article thumbnail',
-                        },
-                    ],
-                }}
+                description={data.synopsis}
+                // openGraph={{
+                //     url: `${canonical}/blog/${data.id}`,
+                //     images: [
+                //         {
+                //             url: `/articles/${data.imagePath}/thumbnail.png`,
+                //             alt: 'article thumbnail',
+                //         },
+                //     ],
+                // }}
             />
             <Date>
-                <time>{data.date}</time>
+                <time>{dayjs(data.updatedAt).format('ll')}</time>
                 <span>・</span>
-                <span>{wpm} min read</span>
+                {/* <span>{wpm} min read</span> */}
             </Date>
             <Title>{data.title}</Title>
             <Profile />
-            <Content>{content}</Content>
+            <Content>{data.body}</Content>
         </Container>
     )
 }
@@ -71,6 +61,7 @@ const Title = styled.h1`
 `
 const Date = styled.div`
     display: flex;
+    align-items: center;
     color: ${(props) => props.theme.text.secondary};
     font-size: 14px;
 `
@@ -82,17 +73,17 @@ const Content = styled.div`
 `
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = getPostAll().map((m) => ({
+    const { contents } = await getData
+    const paths = contents.map((m) => ({
         params: {
-            slug: m.data.slug,
+            slug: m.id,
         },
     }))
     return { paths, fallback: false }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
-    const { content, data } = getPostAll().find((m) => m.data.slug === slug)
-    const source = await renderToString(content, { components })
-    const wpm = await getReadingTime(content)
-    return { props: { source, data, wpm } }
+    const { contents } = await getData
+    const data = contents.find((m) => m.id === slug)
+    return { props: { data } }
 }

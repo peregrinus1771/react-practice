@@ -6,28 +6,27 @@ dayjs.extend(localizedFormat)
 import { PostData } from '../types/types'
 import styled from 'styled-components'
 
-export function Posts({ posts }: { posts: PostData[] }) {
-
+export const Posts= ({ posts }: { posts: PostData[] }) => {
     return (
         <Container>
             {posts.flatMap((p) => (
-                    <Link href={`/blog/${p.slug}`}>
-                        <Article key={p.title}>
-                            <Left>
-                                <Image
-                                    src={`/articles/${p.imagePath}/thumbnail.png}`}
-                                    alt={p.title}
-                                    width="fill"
-                                    height="fill"
-                                />
-                            </Left>
-                            <Right>
-                                <Title>{p.title}</Title>
-                                <Description>{p.description}</Description>
-                                <Date>{dayjs(p.date).format('ll')}</Date>
-                            </Right>
-                        </Article>
-                    </Link>
+                <Link href={`/blog/${p.id}`} key={p.title}>
+                    <Article>
+                        <Left>
+                            {/* <Image
+                                src={`/articles/${p.imagePath}/thumbnail.png}`}
+                                alt={p.title}
+                                width="fill"
+                                height="fill"
+                            /> */}
+                        </Left>
+                        <Right>
+                            <Title>{p.title}</Title>
+                            <Description>{p.synopsis}</Description>
+                            <Date>{dayjs(p.updatedAt).format('ll')}</Date>
+                        </Right>
+                    </Article>
+                </Link>
             ))}
         </Container>
     )
@@ -50,9 +49,6 @@ const Left = styled.div`
 `
 const Right = styled.div`
 `
-
-
-
 
 const Title = styled.h3`
     margin: 0;

@@ -1,9 +1,9 @@
-import { sns } from '../lib/sns'
+import { sns } from '../utils/sns'
 import styled from 'styled-components'
 import { IoLogoGithub, IoLogoTwitter, IoLogoLinkedin } from 'react-icons/io5'
 import Image from 'next/image'
 
-export const Profile = () => {
+export const Profile: React.VFC = () => {
     return (
         <Container>
             <WhoIs>

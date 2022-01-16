@@ -1,8 +1,9 @@
 import { GetStaticProps } from 'next'
 import { Profile, Posts } from '../components/index'
-import { getPostDataAll } from '../lib/post'
 import { PostData } from '../types/types'
 import styled from 'styled-components'
+import { Search,Categories, Tags } from '../components/index';
+import {getData}from '../utils/post'
 
 interface Props {
     posts: PostData[]
@@ -13,6 +14,11 @@ export default function Home({ posts }: Props) {
         <Container>
             <Profile />
             <Posts posts={posts} />
+            <Sidebar>
+                <Search />
+                <Categories/>
+                <Tags />
+            </Sidebar>
         </Container>
     )
 }
@@ -26,6 +32,9 @@ const Container = styled.div`
     }
 `
 
+const Sidebar = styled.div``
+
 export const getStaticProps: GetStaticProps = async () => {
-    return { props: { posts: getPostDataAll() } }
+    const {contents} = await getData
+    return { props: { posts: contents } }
 }

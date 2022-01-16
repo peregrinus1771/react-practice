@@ -2,7 +2,7 @@ import { Toggle } from './toggle'
 import styled from 'styled-components'
 import Link from 'next/link'
 
-export const Header = (): JSX.Element => {
+export const Header:React.VFC = () => {
     return (
         <Container>
             <Link href="/">HOME</Link>

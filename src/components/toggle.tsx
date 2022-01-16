@@ -1,9 +1,9 @@
 import { IoSunny, IoMoon } from 'react-icons/io5'
 import styled from 'styled-components'
-import { useToggleContext } from '../lib/store'
+import { useToggleContext } from '../utils/store'
 
-export const Toggle = () => {
-    const { theme, setTheme } = useToggleContext()
+export const Toggle: React.VFC = () => {
+    const {theme, setTheme} = useToggleContext()
     const themeToggler = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')
     }

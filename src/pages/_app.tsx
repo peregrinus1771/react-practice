@@ -1,41 +1,23 @@
 import type { AppProps } from 'next/app'
-import { useDarkMode } from '../styles/darkmode'
-import { ToggleContext } from '../lib/store'
-import { Head, Header, Footer } from '../components'
-import styled, { ThemeProvider } from 'styled-components'
+import { useDarkMode } from '../utils/useDarkMode'
+import { ToggleProvider } from '../utils/store'
+import { ThemeProvider } from 'styled-components'
 import { GlobalStyle, LightTheme, DarkTheme } from '../styles/styles'
-import { DefaultSeo } from 'next-seo'
-import { SEO } from '../lib/seo'
+import {Layout} from '../components/index'
+
+
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [theme, setTheme, mountedComponent] = useDarkMode()
+    const [theme, setTheme] = useDarkMode()
     const themeMode = theme === 'light' ? LightTheme : DarkTheme
-
-    if (!mountedComponent) return <div />
     return (
         <ThemeProvider theme={themeMode}>
             <GlobalStyle />
-            <Head />
-            <DefaultSeo {...SEO} />
-            <Container>
-                <ToggleContext.Provider value={{ theme, setTheme }}>
-                    <Header />
-                </ToggleContext.Provider>
-                <main>
-                    <Component {...pageProps} />
-                </main>
-                <Footer />
-            </Container>
+            <ToggleProvider theme={theme} setTheme={setTheme}>
+                <Layout>
+                <Component {...pageProps} />
+                </Layout>
+            </ToggleProvider>
         </ThemeProvider>
     )
 }
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    transition: 0.5s;
-    color: ${(props) => props.theme.text.primary};
-    background-color: ${(props) => props.theme.bg.primary};
-`
