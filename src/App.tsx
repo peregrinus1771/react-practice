@@ -1,39 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import { Hooks, Home, ThirdParty } from './Route/index'
-import styled, { createGlobalStyle } from 'styled-components'
 
 export default function App() {
-    // const numbers = [1, 2, 3, 4, 5]
-    // const operators = ['+', '-', '*', '/']
-
-    // const calculate = (prev: number, current: number, index: number) => {
-    //     console.log(prev, current, index)
-    //     console.log(operators[index])
-
-    //     switch (operators[index]) {
-    //         case '+':
-    //             return prev + current
-    //         case '-':
-    //             return prev - current
-    //         case '*':
-    //             return prev * current
-    //         case '/':
-    //             if (current === 0) {
-    //                 console.log('undefined: divided by zero')
-    //                 break
-    //             } else return prev / current
-    //         default:
-    //             console.log('You need to click operator')
-    //     }
-    // }
-
-    // const formula = () => {
-    //     return numbers.reduce((prev, current, index) => {
-    //         return calculate(prev, current, index - 1)
-    //     })
-    // }
-    // console.log(formula())
 
     return (
         <>
@@ -72,6 +41,3 @@ export default function App() {
     )
 }
 
-const GlobalStyle = createGlobalStyle`
-
-// `
