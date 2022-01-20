@@ -1,0 +1,8 @@
+export { FirstChild, SecondChild } from './children/index'
+export { Counter } from './counter/counter'
+export { Calculator } from './calculator/calculator'
+export { Hoc } from './HOC/hoc'
+export { Modal } from './modal/modal'
+export { PaginateParent } from './paginate/paginateParent'
+export { PropsParent } from './props/propsParent'
+export { SearchFilter } from './searchFilter/searchFilter'
