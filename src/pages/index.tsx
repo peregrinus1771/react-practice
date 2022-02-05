@@ -1,23 +1,31 @@
 import { GetStaticProps } from 'next'
-import { Profile, Posts } from '../components/index'
-import { PostData } from '../types/types'
+import { Profile, Posts, Pagination } from '../components/index'
+import { CategoryTypes, PostTypes, TagTypes } from '../types/types'
 import styled from 'styled-components'
-import { Search,Categories, Tags } from '../components/index';
-import {getData}from '../utils/post'
+import { Search } from '../components/index'
+import { getBlog } from '../utils/post'
+import { usePaginatedPosts } from '../utils/paginate';
 
 interface Props {
-    posts: PostData[]
+    posts: PostTypes[]
+    categories: CategoryTypes[]
+    tags: TagTypes[]
 }
 
 export default function Home({ posts }: Props) {
+    const{currentPosts, postsPerPage, totalPosts, paginate} = usePaginatedPosts(posts)
+
     return (
         <Container>
             <Profile />
-            <Posts posts={posts} />
+            <Posts posts={currentPosts} />
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={totalPosts}
+                paginate={paginate}
+                />
             <Sidebar>
                 <Search />
-                <Categories/>
-                <Tags />
             </Sidebar>
         </Container>
     )
@@ -35,6 +43,11 @@ const Container = styled.div`
 const Sidebar = styled.div``
 
 export const getStaticProps: GetStaticProps = async () => {
-    const {contents} = await getData
-    return { props: { posts: contents } }
+    const posts = await getBlog
+
+    return {
+        props: {
+            posts: posts.contents,
+        },
+    }
 }

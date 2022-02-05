@@ -4,6 +4,5 @@ export { Posts } from './posts'
 export { Profile } from './profile'
 export { Head } from './head'
 export { Layout } from './layout'
-export {Categories } from './categories'
 export {Search} from './search'
-export {Tags} from './tags'
+export { Pagination } from './pagination';
