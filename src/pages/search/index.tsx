@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Search({ posts }: Props) {
-    console.log(posts);
+    console.log(posts)
 
     if (!posts.length) {
         return <div>loading...</div>
@@ -48,8 +48,6 @@ const Container = styled.div`
     }
 `
 
-
-
 const Article = styled.article`
     display: flex;
     flex-direction: row;
@@ -79,12 +77,10 @@ const Description = styled.p`
 
 const Date = styled.time`
     color: var(--sub-color);
-    `
+`
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const {q} = context.query
+    const { q } = context.query
     const posts = await getSearch(q)
-    return { props: {posts:posts.contents} }
+    return { props: { posts: posts.contents } }
 }
-
-

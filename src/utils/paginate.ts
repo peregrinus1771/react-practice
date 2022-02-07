@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { PostTypes } from '../types/types';
+import { PostTypes } from '../types/types'
 
-export const usePaginatedPosts = (posts:PostTypes[]) => {
+export const usePaginatedPosts = (posts: PostTypes[]) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const postsPerPage = 10
     const totalPosts = posts.length
@@ -10,7 +10,7 @@ export const usePaginatedPosts = (posts:PostTypes[]) => {
     const indexOfFirstPost = indexOfLastPost - postsPerPage
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
 
-    const paginate = (pageNumber: number):void => setCurrentPage(pageNumber)
+    const paginate = (pageNumber: number): void => setCurrentPage(pageNumber)
 
     return { currentPosts, postsPerPage, totalPosts, paginate }
 }

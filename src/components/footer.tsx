@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import dayjs from 'dayjs'
 
-export const Footer:React.VFC = () => {
+export const Footer: React.VFC = () => {
     const publishedYear = '2021'
     const thisYear = dayjs().format('YYYY')
     const year =

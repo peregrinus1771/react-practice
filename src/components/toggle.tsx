@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useToggleContext } from '../utils/store'
 
 export const Toggle: React.VFC = () => {
-    const {theme, setTheme} = useToggleContext()
+    const { theme, setTheme } = useToggleContext()
     const themeToggler = () => {
         theme === 'light' ? setTheme('dark') : setTheme('light')
     }

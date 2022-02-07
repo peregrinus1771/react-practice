@@ -1,4 +1,4 @@
-import {client}  from './api'
+import { client } from './api'
 
 export const getReadingTime = (sentences) => {
     const wordCount = sentences.split(/\W+/).length
@@ -15,7 +15,7 @@ export const getJaWPM = (sentences) => {
 export const getBlog = client.blog.$get()
 export const getCategories = client.category.$get()
 export const getTags = client.tag.$get()
-export const getSearch = async (query:string) => {
+export const getSearch = async (query: string) => {
     const encodedQuery = encodeURI(query)
     const response = await client.blog.$get({
         query: { q: encodedQuery },

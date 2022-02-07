@@ -1,8 +1,8 @@
-import {ReactNode} from 'react'
-import {Head, Header, Footer} from './index'
+import { ReactNode } from 'react'
+import { Head, Header, Footer } from './index'
 import styled from 'styled-components'
-import {SEO} from '../utils/seo'
-import {DefaultSeo} from 'next-seo'
+import { SEO } from '../utils/seo'
+import { DefaultSeo } from 'next-seo'
 
 export const Layout = ({ children }: { children: ReactNode }) => {
     return (
@@ -15,7 +15,6 @@ export const Layout = ({ children }: { children: ReactNode }) => {
         </Container>
     )
 }
-
 
 const Container = styled.div`
     display: flex;

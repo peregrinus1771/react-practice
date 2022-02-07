@@ -11,15 +11,15 @@ export const Posts = ({ posts }: { posts: PostTypes[] }) => {
         <Container>
             {posts.flatMap((p) => (
                 <Article key={p.title}>
-                    <Left>
+                    <Img>
                         {/* <Image
                                 src={`/articles/${p.imagePath}/thumbnail.png}`}
                                 alt={p.title}
                                 width="fill"
                                 height="fill"
                             /> */}
-                    </Left>
-                    <Right>
+                    </Img>
+                    <Description>
                         <Tag>
                             {p.tag.map((t) => (
                                 <li key={t.id}>
@@ -37,12 +37,12 @@ export const Posts = ({ posts }: { posts: PostTypes[] }) => {
                                 {p.category.name}
                             </Link>
                         </Category>
-                        <Description>{p.synopsis}</Description>
-                        <Date>{dayjs(p.updatedAt).format('ll')}</Date>
+                        <Synopsis>{p.synopsis}</Synopsis>
+                        <Date>{dayjs(p.publishedAt).format('ll')}</Date>
                         <ReadMore>
                             <Link href={`/blog/${p.id}`}>read more...</Link>
                         </ReadMore>
-                    </Right>
+                    </Description>
                 </Article>
             ))}
         </Container>
@@ -58,8 +58,8 @@ const Article = styled.article`
     padding: 10px 15px;
     border: 1px solid gray;
 `
-const Left = styled.div``
-const Right = styled.div``
+const Img = styled.div``
+const Description = styled.div``
 
 const Tag = styled.ul`
     display: flex;
@@ -76,7 +76,7 @@ const Title = styled.h3`
 `
 const Category = styled.span``
 
-const Description = styled.p`
+const Synopsis = styled.p`
     font-size: 18px;
     color: ${(props) => props.theme.text.secondary};
 `

@@ -3,9 +3,7 @@ import { useDarkMode } from '../utils/useDarkMode'
 import { ToggleProvider } from '../utils/store'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyle, LightTheme, DarkTheme } from '../styles/styles'
-import {Layout} from '../components/index'
-
-
+import { Layout } from '../components/index'
 
 export default function App({ Component, pageProps }: AppProps) {
     const [theme, setTheme] = useDarkMode()
@@ -15,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <GlobalStyle />
             <ToggleProvider theme={theme} setTheme={setTheme}>
                 <Layout>
-                <Component {...pageProps} />
+                    <Component {...pageProps} />
                 </Layout>
             </ToggleProvider>
         </ThemeProvider>

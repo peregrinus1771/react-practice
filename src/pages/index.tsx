@@ -4,7 +4,7 @@ import { CategoryTypes, PostTypes, TagTypes } from '../types/types'
 import styled from 'styled-components'
 import { Search } from '../components/index'
 import { getBlog } from '../utils/post'
-import { usePaginatedPosts } from '../utils/paginate';
+import { usePaginatedPosts } from '../utils/paginate'
 
 interface Props {
     posts: PostTypes[]
@@ -13,17 +13,13 @@ interface Props {
 }
 
 export default function Home({ posts }: Props) {
-    const{currentPosts, postsPerPage, totalPosts, paginate} = usePaginatedPosts(posts)
+    const { currentPosts, ...pagination } = usePaginatedPosts(posts)
 
     return (
         <Container>
             <Profile />
             <Posts posts={currentPosts} />
-            <Pagination
-                postsPerPage={postsPerPage}
-                totalPosts={totalPosts}
-                paginate={paginate}
-                />
+            <Pagination pagination={pagination} />
             <Sidebar>
                 <Search />
             </Sidebar>

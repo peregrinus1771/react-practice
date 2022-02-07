@@ -1,5 +1,3 @@
-
-
 export type CategoryTypes = {
     id: string
     name: string
@@ -15,7 +13,8 @@ export type PostTypes = {
     title: string
     body: string
     synopsis: string
-    updatedAt: string
+    publishedAt: string
+    revisedAt: string
     category: CategoryTypes
     tag: TagTypes[]
 }

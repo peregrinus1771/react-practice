@@ -1,6 +1,6 @@
 import NextHead from 'next/head'
 
-export const  Head:React.VFC = () => {
+export const Head: React.VFC = () => {
     return (
         <NextHead>
             <meta

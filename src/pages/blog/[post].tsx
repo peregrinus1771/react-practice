@@ -31,7 +31,8 @@ export default function Post({ data }: Props) {
                 // }}
             />
             <Date>
-                <time>{dayjs(data.updatedAt).format('ll')}</time>
+                <time>{dayjs(data.revisedAt).format('ll')}</time>
+                <time>{dayjs(data.publishedAt).format('ll')}</time>
                 <span>・</span>
                 {/* <span>{wpm} min read</span> */}
             </Date>
