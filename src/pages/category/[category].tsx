@@ -1,11 +1,11 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import { getCategories, getBlog } from '../../utils/post'
 import styled from 'styled-components'
-import { PostTypes } from '../../types/types'
+import { ContentTypes } from '../../../api/types'
 import Link from 'next/link'
 
 interface Props {
-    data: PostTypes[]
+    data: ContentTypes[]
 }
 
 export default function Category({ data }: Props) {

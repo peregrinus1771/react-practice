@@ -1,20 +1,27 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
-import type { PostTypes } from '../../types/types'
+import type { ContentTypes } from '../../../api/types'
 import { getBlog, getReadingTime } from '../../utils/post'
+import { parseForTableOfContents, parseToHighlight } from '../../lib/parse'
 import { Profile } from '../../components/index'
 import { canonical } from '../../utils/seo'
 import { NextSeo } from 'next-seo'
 import styled from 'styled-components'
+import * as scroll from 'react-scroll'
+import 'highlight.js/styles/hybrid.css'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import { log } from 'console'
 dayjs.extend(localizedFormat)
 
 interface Props {
-    data: PostTypes
+    data: ContentTypes
 }
 
 export default function Post({ data }: Props) {
     // const wpm = getReadingTime(data.body)
+    const tableOfContents = parseForTableOfContents(data.body)
+    const highlightedContent = parseToHighlight(data.body)
+    const Scroll = scroll.Link
     return (
         <Container>
             <NextSeo
@@ -46,7 +53,18 @@ export default function Post({ data }: Props) {
             </a>
 
             <Profile />
-            <Content>{data.body}</Content>
+            <TableOfContents>
+                <ul>
+                    {tableOfContents.map((content) => (
+                        <li key={content.id}>
+                            <Scroll to={content.id} smooth={true}>
+                                {content.text}
+                            </Scroll>
+                        </li>
+                    ))}
+                </ul>
+            </TableOfContents>
+            <Content>{highlightedContent}</Content>
         </Container>
     )
 }
@@ -75,6 +93,8 @@ const Date = styled.div`
     font-size: 14px;
 `
 
+const TableOfContents = styled.div``
+
 const Content = styled.div`
     @media (min-width: 768px) {
         margin: 80px 0;
@@ -93,6 +113,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params: { post } }) => {
     const { contents } = await getBlog
+
+
     const data = contents.find((m) => m.id === post)
     return { props: { data } }
 }

@@ -1,11 +1,11 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import { getBlog, getTags } from '../../utils/post'
 import styled from 'styled-components'
-import { PostTypes } from '../../types/types'
+import { ContentTypes } from '../../../api/types'
 import Link from 'next/link'
 
 interface Props {
-    data: PostTypes[]
+    data: ContentTypes[]
 }
 
 export default function Tag({ data }: Props) {
@@ -86,8 +86,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { tag } }) => {
+
     const { contents } = await getBlog
-    console.log(contents)
 
     const data = contents.filter(
         (c) => c.tag.some((t) => t.name === tag) === true
@@ -95,3 +95,4 @@ export const getStaticProps: GetStaticProps = async ({ params: { tag } }) => {
 
     return { props: { data } }
 }
+

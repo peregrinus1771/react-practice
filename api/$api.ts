@@ -2,22 +2,22 @@
 // prettier-ignore
 import { AspidaClient, dataToURLString } from 'aspida'
 // prettier-ignore
-import { Methods as Methods0 } from './blog'
+import { Methods as Methods0 } from './category'
 // prettier-ignore
-import { Methods as Methods1 } from './category'
+import { Methods as Methods1 } from './content'
 // prettier-ignore
 import { Methods as Methods2 } from './tag'
 
 // prettier-ignore
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? '' : baseURL).replace(/\/$/, '')
-  const PATH0 = '/blog'
-  const PATH1 = '/category'
+  const PATH0 = '/category'
+  const PATH1 = '/content'
   const PATH2 = '/tag'
   const GET = 'GET'
 
   return {
-    blog: {
+    category: {
       get: (option?: { query?: Methods0['get']['query'], config?: T }) =>
         fetch<Methods0['get']['resBody']>(prefix, PATH0, GET, option).json(),
       $get: (option?: { query?: Methods0['get']['query'], config?: T }) =>
@@ -25,7 +25,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       $path: (option?: { method?: 'get'; query: Methods0['get']['query'] }) =>
         `${prefix}${PATH0}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`
     },
-    category: {
+    content: {
       get: (option?: { query?: Methods1['get']['query'], config?: T }) =>
         fetch<Methods1['get']['resBody']>(prefix, PATH1, GET, option).json(),
       $get: (option?: { query?: Methods1['get']['query'], config?: T }) =>

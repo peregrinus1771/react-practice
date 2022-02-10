@@ -3,10 +3,10 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
-import { PostTypes } from '../types/types'
+import { ContentTypes } from '../../api/types'
 import styled from 'styled-components'
 
-export const Posts = ({ posts }: { posts: PostTypes[] }) => {
+export const Posts = ({ posts }: { posts: ContentTypes[] }) => {
     return (
         <Container>
             {posts.flatMap((p) => (

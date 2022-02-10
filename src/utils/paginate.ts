@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { PostTypes } from '../types/types'
+import { ContentTypes } from '../../api/types'
 
-export const usePaginatedPosts = (posts: PostTypes[]) => {
+export const usePaginatedPosts = (posts: ContentTypes[]) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const postsPerPage = 10
     const totalPosts = posts.length

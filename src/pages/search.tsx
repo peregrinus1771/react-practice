@@ -1,11 +1,11 @@
 import { GetServerSideProps } from 'next'
-import { PostTypes } from '../../types/types'
-import { getSearch } from '../../utils/post'
+import { ContentTypes } from '../../api/types'
+import { getSearch } from '../utils/post'
 import Link from 'next/link'
 import styled from 'styled-components'
 
 interface Props {
-    posts: PostTypes[]
+    posts: ContentTypes[]
 }
 
 export default function Search({ posts }: Props) {
@@ -30,7 +30,7 @@ export default function Search({ posts }: Props) {
                         <Right>
                             <Title>{p.title}</Title>
                             <Description>{p.synopsis}</Description>
-                            <Date>{p.updatedAt}</Date>
+                            <Date>{p.revisedAt}</Date>
                         </Right>
                     </Article>
                 </Link>
