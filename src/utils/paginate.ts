@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { ContentTypes } from '../../api/types'
+import { ArticleTypes } from '../lib/aspida/types'
 
-export const usePaginatedPosts = (posts: ContentTypes[]) => {
+export const usePaginatedPosts = (posts: ArticleTypes[]) => {
     const [currentPage, setCurrentPage] = useState<number>(1)
     const postsPerPage = 10
     const totalPosts = posts.length

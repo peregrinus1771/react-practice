@@ -1,29 +1,32 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
-import type { ContentTypes } from '../../../api/types'
-import { getBlog, getReadingTime } from '../../utils/post'
-import { parseForTableOfContents, parseToHighlight } from '../../lib/parse'
+import type { ArticleTypes } from '../../lib/aspida/types'
+import { getArticle, getReadingTime } from '../../utils/post'
+import { parse } from '../../lib/parse'
 import { Profile } from '../../components/index'
 import { canonical } from '../../utils/seo'
 import { NextSeo } from 'next-seo'
-import styled from 'styled-components'
 import * as scroll from 'react-scroll'
-import 'highlight.js/styles/hybrid.css'
+// import 'highlight.js/styles/hybrid.css'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import { log } from 'console'
 dayjs.extend(localizedFormat)
+import 'highlight.js/styles/night-owl.css'
+
 
 interface Props {
-    data: ContentTypes
+    data: ArticleTypes
+    parsedData: {
+        highlightedContents: string
+        tableOfContents: any
+    }
 }
 
-export default function Post({ data }: Props) {
+export default function Post({ data, parsedData }: Props) {
     // const wpm = getReadingTime(data.body)
-    const tableOfContents = parseForTableOfContents(data.body)
-    const highlightedContent = parseToHighlight(data.body)
+
     const Scroll = scroll.Link
     return (
-        <Container>
+        <div className="w-screen max-w-3xl p-3 md:w-10/12">
             <NextSeo
                 title={data.title}
                 description={data.synopsis}
@@ -37,13 +40,13 @@ export default function Post({ data }: Props) {
                 //     ],
                 // }}
             />
-            <Date>
+            <div className="flex items-center">
                 <time>{dayjs(data.revisedAt).format('ll')}</time>
                 <time>{dayjs(data.publishedAt).format('ll')}</time>
                 <span>・</span>
                 {/* <span>{wpm} min read</span> */}
-            </Date>
-            <Title>{data.title}</Title>
+            </div>
+            <h1 className="mx-0 mt-0 mb-3 font-thin md:mb-10">{data.title}</h1>
             <a
                 href="http://www.facebook.com/share.php?u={}"
                 rel="noreferrer"
@@ -53,9 +56,9 @@ export default function Post({ data }: Props) {
             </a>
 
             <Profile />
-            <TableOfContents>
+            <div>
                 <ul>
-                    {tableOfContents.map((content) => (
+                    {parsedData.tableOfContents.map((content) => (
                         <li key={content.id}>
                             <Scroll to={content.id} smooth={true}>
                                 {content.text}
@@ -63,46 +66,31 @@ export default function Post({ data }: Props) {
                         </li>
                     ))}
                 </ul>
-            </TableOfContents>
-            <Content>{highlightedContent}</Content>
-        </Container>
+            </div>
+            <div
+                className="md:my-20 md:mx-0"
+                dangerouslySetInnerHTML={{
+                    __html: parsedData.highlightedContents,
+                }}
+            ></div>
+        </div>
     )
 }
-const Container = styled.div`
-    width: 100vw;
-    max-width: 50rem;
-    padding: 10px;
 
-    @media (min-width: 768px) {
-        width: 75rem;
-    }
-`
-const Title = styled.h1`
-    margin: 0px 0 10px;
-    font-size: 36px;
-    font-weight: 100;
-    @media (min-width: 768px) {
-        font-size: 48px;
-        margin-bottom: 40px;
-    }
-`
-const Date = styled.div`
-    display: flex;
-    align-items: center;
-    color: ${(props) => props.theme.text.secondary};
-    font-size: 14px;
-`
+// const Title = styled.h1`
+//     font-size: 36px;
+//     @media (min-width: 768px) {
+//         font-size: 48px;
 
-const TableOfContents = styled.div``
+// `
+// const Date = styled.div`
 
-const Content = styled.div`
-    @media (min-width: 768px) {
-        margin: 80px 0;
-    }
-`
+//     color: ${(props) => props.theme.text.secondary};
+//     font-size: 14px;
+// `
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const { contents } = await getBlog
+    const { contents } = await getArticle
     const paths = contents.map((m) => ({
         params: {
             post: m.id,
@@ -112,9 +100,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { post } }) => {
-    const { contents } = await getBlog
-
+    const { contents } = await getArticle
 
     const data = contents.find((m) => m.id === post)
-    return { props: { data } }
+    const parsedData = parse(data.body)
+    return { props: { data, parsedData } }
 }

@@ -1,9 +1,9 @@
 /* eslint-disable */
 // prettier-ignore
 export const pagesPath = {
-  blog: {
+  article: {
     _post: (post: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/blog/[post]' as const, query: { post }, hash: url?.hash })
+      $url: (url?: { hash?: string }) => ({ pathname: '/article/[post]' as const, query: { post }, hash: url?.hash })
     })
   },
   category: {

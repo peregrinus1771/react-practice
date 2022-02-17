@@ -1,13 +1,12 @@
 import { sns } from '../utils/sns'
-import styled from 'styled-components'
 import { IoLogoGithub, IoLogoTwitter, IoLogoLinkedin } from 'react-icons/io5'
 import Image from 'next/image'
 
 export const Profile: React.VFC = () => {
     return (
-        <Container>
-            <WhoIs>
-                <Selfie>
+        <div className="flex flex-row justify-between mb-5">
+            <div className="flex gap-1 md:gap-3 md:mb-0">
+                <div className="w-8 h-8 rounded-full">
                     <Image
                         src="/articles/2021/3-15/thumbnail.png"
                         alt="profile"
@@ -15,79 +14,40 @@ export const Profile: React.VFC = () => {
                         height="32px"
                         layout="responsive"
                     />
-                </Selfie>
-                <Author>
-                    <Name>Flik</Name>
-                    <Position>Frontend Developer</Position>
-                </Author>
-            </WhoIs>
-            <SnsLink>
+                </div>
+                <div>
+                    <p className="m-0">Flik</p>
+                    <p className="m-0">Frontend Developer</p>
+                </div>
+            </div>
+            <div className="flex items-center md:gap-2 md:justify-between">
                 <a href={sns.github.link} target="_blank" rel="noreferrer">
-                    <LogoContainer>
+                    <div className="flex justify-center items-center w-8 h-8 opacity-60 hover:opacity-100">
                         <IoLogoGithub size={28} color="inherit" />
-                    </LogoContainer>
+                    </div>
                 </a>
                 <a href={sns.linkedin.link} target="_blank" rel="noreferrer">
-                    <LogoContainer>
+                    <div>
                         <IoLogoLinkedin size={28} color="inherit" />
-                    </LogoContainer>
+                    </div>
                 </a>
                 <a href={sns.twitter.link} target="_blank" rel="noreferrer">
-                    <LogoContainer>
+                    <div>
                         <IoLogoTwitter size={28} color="inherit" />
-                    </LogoContainer>
+                    </div>
                 </a>
-            </SnsLink>
-        </Container>
+            </div>
+        </div>
     )
 }
 
-const Container = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-bottom: 20px;
-`
-const WhoIs = styled.div`
-    display: flex;
-    gap: 4px;
-    @media (min-width: 768px) {
-        gap: 10px;
-        margin-bottom: 0;
-    }
-`
-const Selfie = styled.div`
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-`
-const Author = styled.div``
-const Name = styled.p`
-    margin: 0;
-    font-size: 18px;
-`
-const Position = styled.p`
-    margin: 0;
-    color: ${(props) => props.theme.text.secondary};
-    font-size: 12px;
-`
-const SnsLink = styled.div`
-    display: flex;
-    align-items: center;
-    @media (min-width: 768px) {
-        justify-content: space-between;
-        gap: 9px;
-    }
-`
-const LogoContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2rem;
-    width: 2rem;
-    opacity: 0.6;
-    color: ${(props) => props.theme.text.secondary};
-    &:hover {
-        opacity: 1;
-    }
-`
+// const Name = styled.p`
+//     font-size: 18px;
+// `
+// const Position = styled.p`
+//     color: ${(props) => props.theme.text.secondary};
+//     font-size: 12px;
+// `
+// const LogoContainer = styled.div`
+//     color: ${(props) => props.theme.text.secondary};
+// `

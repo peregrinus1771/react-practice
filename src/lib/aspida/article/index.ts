@@ -1,9 +1,9 @@
 import { MicroCMSListResponse, MicroCMSQueries } from 'microcms-js-sdk'
-import { ContentTypes } from '../types'
+import { ArticleTypes } from '../types'
 
 export type Methods = {
     get: {
         query?: MicroCMSQueries
-        resBody: MicroCMSListResponse<ContentTypes>
+        resBody: MicroCMSListResponse<ArticleTypes>
     }
 }

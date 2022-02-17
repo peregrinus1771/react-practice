@@ -3,86 +3,66 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
-import { ContentTypes } from '../../api/types'
-import styled from 'styled-components'
+import { ArticleTypes } from '../lib/aspida/types'
+import { pagesPath } from '../lib/pathpida/$path'
 
-export const Posts = ({ posts }: { posts: ContentTypes[] }) => {
+export const Posts = ({ posts }: { posts: ArticleTypes[] }) => {
     return (
-        <Container>
+        <div>
             {posts.flatMap((p) => (
-                <Article key={p.title}>
-                    <Img>
+                <article
+                    key={p.title}
+                    className="flex flex-row items-start py-3 px-4 border-2 border-gray-400"
+                >
+                    <div>
                         {/* <Image
                                 src={`/articles/${p.imagePath}/thumbnail.png}`}
                                 alt={p.title}
                                 width="fill"
                                 height="fill"
                             /> */}
-                    </Img>
-                    <Description>
-                        <Tag>
+                    </div>
+                    <div>
+                        <ul className="flex list-none">
                             {p.tag.map((t) => (
                                 <li key={t.id}>
-                                    <Link href={`/tag/${t.name}`}>
+                                    <Link
+                                        href={pagesPath.tag._tag(t.name).$url()}
+                                    >
                                         {t.name}
                                     </Link>
                                 </li>
                             ))}
-                        </Tag>
-                        <Title>
-                            <Link href={`/blog/${p.id}`}>{p.title}</Link>
-                        </Title>
-                        <Category>
-                            <Link href={`/category/${p.category.name}`}>
+                        </ul>
+                        <h3 className="m-0 hover:cursor-pointer	hover:no-underline">
+                            <Link href={pagesPath.article._post(p.id).$url()}>{p.title}</Link>
+                        </h3>
+                        <span>
+                            <Link href={pagesPath.category._category(p.category.name).$url()}>
                                 {p.category.name}
                             </Link>
-                        </Category>
-                        <Synopsis>{p.synopsis}</Synopsis>
-                        <Date>{dayjs(p.publishedAt).format('ll')}</Date>
-                        <ReadMore>
-                            <Link href={`/blog/${p.id}`}>read more...</Link>
-                        </ReadMore>
-                    </Description>
-                </Article>
+                        </span>
+                        <p className="">{p.synopsis}</p>
+                        <time>{dayjs(p.publishedAt).format('ll')}</time>
+                        <p>
+                            <Link href={pagesPath.article._post(p.id).$url()}>read more...</Link>
+                        </p>
+                    </div>
+                </article>
             ))}
-        </Container>
+        </div>
     )
 }
 
-const Container = styled.div``
+// const Title = styled.h3`
+//     font-size: 26px;
+// `
 
-const Article = styled.article`
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    padding: 10px 15px;
-    border: 1px solid gray;
-`
-const Img = styled.div``
-const Description = styled.div``
+// const Synopsis = styled.p`
+//     font-size: 18px;
+//     color: ${(props) => props.theme.text.secondary};
+// `
 
-const Tag = styled.ul`
-    display: flex;
-    list-style: none;
-`
-
-const Title = styled.h3`
-    margin: 0;
-    font-size: 26px;
-    :hover & {
-        text-decoration: underline;
-        cursor: pointer;
-    }
-`
-const Category = styled.span``
-
-const Synopsis = styled.p`
-    font-size: 18px;
-    color: ${(props) => props.theme.text.secondary};
-`
-
-const Date = styled.time`
-    color: var(--sub-color);
-`
-
-const ReadMore = styled.p``
+// const Date = styled.time`
+//     color: var(--sub-color);
+// `

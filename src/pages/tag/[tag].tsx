@@ -1,79 +1,36 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
-import { getBlog, getTags } from '../../utils/post'
-import styled from 'styled-components'
-import { ContentTypes } from '../../../api/types'
-import Link from 'next/link'
+import { getArticle, getTags } from '../../utils/post'
+import { ArticleTypes } from '../../lib/aspida/types'
+import {Posts} from '../../components'
 
 interface Props {
-    data: ContentTypes[]
+    data: ArticleTypes[]
 }
 
 export default function Tag({ data }: Props) {
     // const wpm = getReadingTime(data.body)
     return (
-        <Container>
-            {data.flatMap((p) => (
-                <Link href={`/blog/${p.id}`} key={p.title}>
-                    <Article>
-                        <Left>
-                            {/* <Image
-                                src={`/articles/${p.imagePath}/thumbnail.png}`}
-                                alt={p.title}
-                                width="fill"
-                                height="fill"
-                            /> */}
-                        </Left>
-                        <Right>
-                            <Title>{p.title}</Title>
-                            <Description>{p.synopsis}</Description>
-                            <Date>{p.updatedAt}</Date>
-                        </Right>
-                    </Article>
-                </Link>
-            ))}
-        </Container>
+        <div className="w-screen max-w-4xl grow p-3 md:w-10/12">
+            <Posts posts={data} />
+        </div>
     )
 }
-const Container = styled.div`
-    width: 100vw;
-    max-width: 50rem;
-    padding: 10px;
 
-    @media (min-width: 768px) {
-        width: 75rem;
-    }
-`
+// const Title = styled.h3`
+//     font-size: 26px;
+//     ${Article}:hover & {
+//         text-decoration: underline;
+//     }
+// `
 
-const Article = styled.article`
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    padding: 10px 15px;
-    border: 1px solid gray;
+// const Description = styled.p`
+//     font-size: 18px;
+//     color: ${(props) => props.theme.text.secondary};
+// `
 
-    &:hover {
-        cursor: pointer;
-    }
-`
-const Left = styled.div``
-const Right = styled.div``
-
-const Title = styled.h3`
-    margin: 0;
-    font-size: 26px;
-    ${Article}:hover & {
-        text-decoration: underline;
-    }
-`
-
-const Description = styled.p`
-    font-size: 18px;
-    color: ${(props) => props.theme.text.secondary};
-`
-
-const Date = styled.time`
-    color: var(--sub-color);
-`
+// const Date = styled.time`
+//     color: var(--sub-color);
+// `
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const { contents } = await getTags
@@ -86,8 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { tag } }) => {
-
-    const { contents } = await getBlog
+    const { contents } = await getArticle
 
     const data = contents.filter(
         (c) => c.tag.some((t) => t.name === tag) === true
@@ -95,4 +51,3 @@ export const getStaticProps: GetStaticProps = async ({ params: { tag } }) => {
 
     return { props: { data } }
 }
-

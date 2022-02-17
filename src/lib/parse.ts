@@ -1,26 +1,22 @@
-import * as cheerio from 'cheerio'
+import cheerio from 'cheerio'
 import hljs from 'highlight.js'
 
-export function parseForTableOfContents(
-    body: string,
-): { text: string; id: string; name: string }[] {
+export const parse = (body) => {
     const $ = cheerio.load(body)
+
+    $('pre code').each((_, elm) => {
+        const result = hljs.highlightAuto($(elm).text())
+        $(elm).html(result.value)
+        $(elm).addClass('hljs')
+    })
+
     const headings = $('h1, h2, h3').toArray()
-    console.log(headings)
-    const toc = headings.map((data) => ({
+    const tableOfContents = headings.map((data) => ({
+        // @ts-ignore
         text: data.children[0].data,
         id: data.attribs.id,
         name: data.name,
     }))
-    return toc
-}
 
-export function parseToHighlight(body: string) {
-    const $ = cheerio.load(body)
-    $('pre code').each((_, element) => {
-        const result = hljs.highlightAuto($(element).text())
-        $(element).html(result.value)
-        $(element).addClass('hljs')
-    })
-    return $.html()
+    return { highlightedContents: $.html(), tableOfContents }
 }

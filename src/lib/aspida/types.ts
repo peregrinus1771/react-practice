@@ -16,7 +16,7 @@ export type TagTypes = {
     name: string
 }
 
-export type ContentTypes = {
+export type ArticleTypes = {
     id: string
     createdAt: string
     updatedAt: string

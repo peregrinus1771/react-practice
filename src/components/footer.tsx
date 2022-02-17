@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import dayjs from 'dayjs'
 
 export const Footer: React.VFC = () => {
@@ -9,21 +8,16 @@ export const Footer: React.VFC = () => {
             ? publishedYear
             : `${publishedYear} - ${thisYear}`
     return (
-        <Container>
-            <Copyright>@{year} Flik</Copyright>
-        </Container>
+        <footer className="flex justify-center items-center self-stretch pt-5 pb-2 mt-auto border-t-2">
+            <p>@{year} Flik</p>
+        </footer>
     )
 }
 
-const Container = styled.footer`
-    padding-top: 20px;
-    border-top: solid 1px ${(props) => props.theme.text.secondary};
-    margin-top: auto;
-    display: flex;
-    align-self: stretch;
-    justify-content: center;
-    align-items: center;
-`
-const Copyright = styled.p`
-    color: ${(props) => props.theme.text.secondary};
-`
+// const Container = styled.footer`
+//     border-top: solid 1px ${(props) => props.theme.text.secondary};
+
+// `
+// const Copyright = styled.p`
+//     color: ${(props) => props.theme.text.secondary};
+// `

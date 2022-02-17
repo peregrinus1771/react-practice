@@ -6,12 +6,12 @@ export const Share = () => {
     return (
         <>
             <ul>
-                <li>
+                {/* <li>
                     <a href={sns.twitter.shareLink}>
                         <IoLogoTwitter />
                         tweet
                     </a>
-                </li>
+                </li> */}
                 <li>
                     <a href={sns.facebook.shareLink}>
                         <IoLogoFacebook />

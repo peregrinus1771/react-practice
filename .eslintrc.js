@@ -13,6 +13,8 @@ module.exports = {
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:jest/recommended',
+        'plugin:tailwindcss/recommended',
+        'prettier',
         // 'recommended-requiring-type-checking',
     ],
     parser: '@typescript-eslint/parser',
@@ -41,5 +43,6 @@ module.exports = {
     rules: {
         'react/react-in-jsx-scope': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
     },
 }

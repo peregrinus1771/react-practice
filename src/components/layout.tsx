@@ -1,25 +1,17 @@
 import { ReactNode } from 'react'
 import { Head, Header, Footer } from './index'
-import styled from 'styled-components'
 import { SEO } from '../utils/seo'
 import { DefaultSeo } from 'next-seo'
 
 export const Layout = ({ children }: { children: ReactNode }) => {
     return (
-        <Container>
+        <div className="flex flex-col justify-center items-center min-h-screen transition-none duration-500">
             <Head />
             <DefaultSeo {...SEO} />
             <Header />
             {children}
             <Footer />
-        </Container>
+        </div>
     )
 }
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    transition: 0.5s;
-`

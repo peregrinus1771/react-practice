@@ -1,4 +1,4 @@
-import { client } from '../../api'
+import { client } from '../lib/aspida'
 
 export const getReadingTime = (sentences) => {
     const wordCount = sentences.split(/\W+/).length
@@ -12,16 +12,16 @@ export const getJaWPM = (sentences) => {
     return Math.floor(wordCount / wordsPerMinute)
 }
 
-export const getBlog = client.content.$get({query:{orders: '-publishedAt'}})
+export const getArticle = client.article.$get({
+    query: { orders: '-publishedAt' },
+})
 export const getCategories = client.category.$get()
 export const getTags = client.tag.$get()
 
 export const getSearch = async (query: string) => {
     const encodedQuery = encodeURI(query)
-    const response = await client.content.$get({
+    const response = await client.article.$get({
         query: { q: encodedQuery, orders: '-publishedAt' },
     })
     return response
 }
-
-
