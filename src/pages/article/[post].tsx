@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import type { ArticleTypes } from '../../lib/aspida/types'
 import { getArticle, getReadingTime } from '../../utils/post'
 import { parse } from '../../lib/parse'
-import { Profile } from '../../components/index'
+import { Profile, Tag } from '../../components/index'
 import { canonical } from '../../utils/seo'
 import { NextSeo } from 'next-seo'
 import * as scroll from 'react-scroll'
@@ -11,7 +12,8 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
 import 'highlight.js/styles/night-owl.css'
-
+import Link from 'next/link';
+import { pagesPath } from '../../lib/pathpida/$path'
 
 interface Props {
     data: ArticleTypes
@@ -24,7 +26,8 @@ interface Props {
 export default function Post({ data, parsedData }: Props) {
     // const wpm = getReadingTime(data.body)
 
-    const Scroll = scroll.Link
+    const ScrollTo = scroll.Link
+
     return (
         <div className="w-screen max-w-3xl p-3 md:w-10/12">
             <NextSeo
@@ -40,6 +43,8 @@ export default function Post({ data, parsedData }: Props) {
                 //     ],
                 // }}
             />
+            <div></div>
+            <Tag tag={data.tag} testId="article-tag-link"/>
             <div className="flex items-center">
                 <time>{dayjs(data.revisedAt).format('ll')}</time>
                 <time>{dayjs(data.publishedAt).format('ll')}</time>
@@ -60,9 +65,14 @@ export default function Post({ data, parsedData }: Props) {
                 <ul>
                     {parsedData.tableOfContents.map((content) => (
                         <li key={content.id}>
-                            <Scroll to={content.id} smooth={true}>
+                            <ScrollTo
+                                to={content.id}
+                                smooth={true}
+                                className="hover:cursor-pointer hover:opacity-50"
+                                data-testid="post-toc-link"
+                            >
                                 {content.text}
-                            </Scroll>
+                            </ScrollTo>
                         </li>
                     ))}
                 </ul>

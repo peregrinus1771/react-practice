@@ -1,13 +1,19 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { pagesPath } from '../lib/pathpida/$path'
+
+export type Query = {
+    q: string
+}
 
 export const Search = () => {
-    const [state, setState] = useState('')
+    const [value, setStateValue] = useState('')
     const router = useRouter()
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
+            if (value === '') return
             e.preventDefault()
-            router.push({ pathname: '/search', query: { q: state } })
+            router.push(pagesPath.search.$url({ query: { q: value.trim() } }))
         }
     }
     return (
@@ -15,8 +21,9 @@ export const Search = () => {
             <label htmlFor="search">search</label>
             <input
                 type="search"
-                name="search"
-                onChange={(e) => setState(e.target.value)}
+                id="search"
+                data-testid="search-input"
+                onChange={(e) => setStateValue(e.target.value)}
                 onKeyPress={(e) => handleKeyPress(e)}
             />
         </>
