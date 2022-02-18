@@ -1,18 +1,26 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link'
 import Image from 'next/image'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
-import { ArticleTypes } from '../lib/aspida/types'
+import { ArticleTypes } from '../types/types'
 import { pagesPath } from '../lib/pathpida/$path'
+import {Tag} from './index'
 
-export const Posts = ({ posts }: { posts: ArticleTypes[] }) => {
+interface Props {
+    posts: ArticleTypes[]
+    searchedWord?: string
+}
+
+
+export const Posts = ({ posts }:Props) => {
     return (
         <div>
             {posts.flatMap((p) => (
                 <article
                     key={p.title}
-                    className="flex flex-row items-start py-3 px-4 border-2 border-gray-400"
+                    className="flex flex-row items-start border-2 border-gray-400 py-3 px-4"
                 >
                     <div>
                         {/* <Image
@@ -23,29 +31,31 @@ export const Posts = ({ posts }: { posts: ArticleTypes[] }) => {
                             /> */}
                     </div>
                     <div>
-                        <ul className="flex list-none">
-                            {p.tag.map((t) => (
-                                <li key={t.id}>
-                                    <Link
-                                        href={pagesPath.tag._tag(t.name).$url()}
-                                    >
-                                        {t.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                        <Tag tag={p.tag} testId="post-tag-link"/>
                         <h3 className="m-0 hover:cursor-pointer	hover:no-underline">
-                            <Link href={pagesPath.article._post(p.id).$url()}>{p.title}</Link>
+                            <Link href={pagesPath.article._post(p.id).$url()}>
+                                <a data-testid="post-article-title-link">{p.title}</a>
+                            </Link>
                         </h3>
                         <span>
-                            <Link href={pagesPath.category._category(p.category.name).$url()}>
-                                {p.category.name}
+                            <Link
+                                href={pagesPath.category
+                                    ._category(p.category.name)
+                                    .$url()}
+                            >
+                                <a data-testid="post-category-link">
+                                    {p.category.name}
+                                </a>
                             </Link>
                         </span>
                         <p className="">{p.synopsis}</p>
                         <time>{dayjs(p.publishedAt).format('ll')}</time>
                         <p>
-                            <Link href={pagesPath.article._post(p.id).$url()}>read more...</Link>
+                            <Link href={pagesPath.article._post(p.id).$url()}>
+                                <a data-testid="post-article-readMore-link">
+                                    read more...
+                                </a>
+                            </Link>
                         </p>
                     </div>
                 </article>

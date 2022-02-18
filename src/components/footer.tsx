@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 export const Footer: React.VFC = () => {
-    const publishedYear = '2021'
+    const publishedYear = '2022'
     const thisYear = dayjs().format('YYYY')
     const year =
         publishedYear === thisYear

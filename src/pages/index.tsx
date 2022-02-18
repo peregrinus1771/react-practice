@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
 import { Profile, Posts, Pagination } from '../components/index'
-import { CategoryTypes, ArticleTypes, TagTypes } from '../lib/aspida/types'
+import { CategoryTypes, ArticleTypes, TagTypes } from '../types/types'
 import { Search } from '../components/index'
 import { getArticle } from '../utils/post'
-import { usePaginatedPosts } from '../utils/paginate'
+import { usePaginatedPosts } from '../hooks/usePaginatedPosts'
 
 interface Props {
     posts: ArticleTypes[]

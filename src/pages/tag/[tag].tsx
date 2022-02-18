@@ -1,6 +1,6 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import { getArticle, getTags } from '../../utils/post'
-import { ArticleTypes } from '../../lib/aspida/types'
+import { ArticleTypes } from '../../types/types'
 import {Posts} from '../../components'
 
 interface Props {
