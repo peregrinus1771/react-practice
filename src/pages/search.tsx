@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import { ArticleTypes } from '../lib/aspida/types'
+import { ArticleTypes } from '../types/types'
 import { getSearch } from '../utils/post'
 import { Posts } from '../components/posts';
 

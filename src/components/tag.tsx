@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link'
-import { TagTypes } from '../lib/aspida/types'
+import { TagTypes } from '../types/types'
 import { pagesPath } from '../lib/pathpida/$path'
 
 interface Props {

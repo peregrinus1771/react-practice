@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArticleTypes } from '../lib/aspida/types'
+import { ArticleTypes } from '../types/types'
 
 export const usePaginatedPosts = (posts: ArticleTypes[]) => {
     const [currentPage, setCurrentPage] = useState<number>(1)

@@ -4,13 +4,13 @@ import Image from 'next/image'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 dayjs.extend(localizedFormat)
-import { ArticleTypes } from '../lib/aspida/types'
+import { ArticleTypes } from '../types/types'
 import { pagesPath } from '../lib/pathpida/$path'
 import {Tag} from './index'
 
 interface Props {
     posts: ArticleTypes[]
-    searchedWord: string
+    searchedWord?: string
 }
 
 

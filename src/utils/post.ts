@@ -1,4 +1,4 @@
-import { client } from '../lib/aspida'
+import { client } from '../lib/aspida/config'
 
 export const getReadingTime = (sentences) => {
     const wordCount = sentences.split(/\W+/).length

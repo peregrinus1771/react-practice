@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import type { GetStaticProps, GetStaticPaths } from 'next'
-import type { ArticleTypes } from '../../lib/aspida/types'
+import type { ArticleTypes } from '../../types/types'
 import { getArticle, getReadingTime } from '../../utils/post'
 import { parse } from '../../lib/parse'
 import { Profile, Tag } from '../../components/index'
