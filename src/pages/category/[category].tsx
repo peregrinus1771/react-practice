@@ -1,7 +1,8 @@
 import type { GetStaticProps, GetStaticPaths } from 'next'
 import { getCategories, getArticle } from '../../utils/post'
 import { ArticleTypes } from '../../types/types'
-import {Posts} from '../../components'
+import { Pagination, Posts } from '../../components'
+import { usePaginatedPosts } from '../../hooks/usePaginatedPosts'
 
 interface Props {
     data: ArticleTypes[]
@@ -9,9 +10,12 @@ interface Props {
 
 export default function Category({ data }: Props) {
     // const wpm = getReadingTime(data.body)
+    const { currentPosts, ...pagination } = usePaginatedPosts(data)
+
     return (
         <div className="w-screen max-w-4xl grow p-3 md:w-10/12">
-            <Posts posts={data} />
+            <Posts posts={currentPosts} />
+            <Pagination pagination={pagination} />
         </div>
     )
 }

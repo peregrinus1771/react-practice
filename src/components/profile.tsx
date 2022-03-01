@@ -4,9 +4,9 @@ import Image from 'next/image'
 
 export const Profile: React.VFC = () => {
     return (
-        <div className="flex flex-row justify-between mb-5">
-            <div className="flex gap-1 md:gap-3 md:mb-0">
-                <div className="w-8 h-8 rounded-full">
+        <div className="mb-5 flex flex-row justify-between">
+            <div className="flex gap-1 md:mb-0 md:gap-3">
+                <div className="h-8 w-8 rounded-full">
                     <Image
                         src="/articles/2021/3-15/thumbnail.png"
                         alt="profile"
@@ -20,9 +20,9 @@ export const Profile: React.VFC = () => {
                     <p className="m-0">Frontend Developer</p>
                 </div>
             </div>
-            <div className="flex items-center md:gap-2 md:justify-between">
+            <div className="flex items-center md:justify-between md:gap-2">
                 <a href={sns.github.link} target="_blank" rel="noreferrer">
-                    <div className="flex justify-center items-center w-8 h-8 opacity-60 hover:opacity-100">
+                    <div className="flex h-8 w-8 items-center justify-center opacity-60 hover:opacity-100">
                         <IoLogoGithub size={28} color="inherit" />
                     </div>
                 </a>

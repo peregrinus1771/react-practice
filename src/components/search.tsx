@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { pagesPath } from '../lib/pathpida/$path'
+import React from 'react'
 
 export type Query = {
     q: string
 }
 
-export const Search = () => {
+// eslint-disable-next-line react/display-name
+export const Search = React.memo(() => {
     const [value, setStateValue] = useState('')
     const router = useRouter()
     const handleKeyPress = (e) => {
@@ -16,6 +18,7 @@ export const Search = () => {
             router.push(pagesPath.search.$url({ query: { q: value.trim() } }))
         }
     }
+
     return (
         <>
             <label htmlFor="search">search</label>
@@ -28,4 +31,4 @@ export const Search = () => {
             />
         </>
     )
-}
+})

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { ArticleTypes } from '../types/types'
 import { getSearch } from '../utils/post'
-import { Posts } from '../components/posts';
+import { Posts } from '../components/posts'
 
 export type Query = {
     q: string
@@ -9,7 +9,7 @@ export type Query = {
 
 interface Props {
     posts: ArticleTypes[]
-    q:string
+    q: string
 }
 
 export default function Search({ posts, q }: Props) {
@@ -18,7 +18,7 @@ export default function Search({ posts, q }: Props) {
     }
     return (
         <div className="w-screen max-w-4xl grow p-3 md:w-10/12">
-            <Posts posts={posts} searchedWord={q}/>
+            <Posts posts={posts} searchedWord={q} />
         </div>
     )
 }
@@ -39,7 +39,9 @@ export default function Search({ posts, q }: Props) {
 //     color: var(--sub-color);
 // `
 
-export const getServerSideProps: GetServerSideProps = async ({query:{q}}) => {
+export const getServerSideProps: GetServerSideProps = async ({
+    query: { q },
+}) => {
     const posts = await getSearch(q as string)
-    return { props: { posts: posts.contents ,q} }
+    return { props: { posts: posts.contents, q } }
 }

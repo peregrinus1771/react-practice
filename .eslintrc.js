@@ -7,15 +7,12 @@ module.exports = {
         jest: true,
     },
     extends: [
-        'eslint:recommended',
-        'plugin:react/recommended',
-        'plugin:react-hooks/recommended',
+        'next:core-web-vitals',
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:jest/recommended',
         'plugin:tailwindcss/recommended',
         'prettier',
-        // 'recommended-requiring-type-checking',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -26,11 +23,8 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: [
-        'import',
         'simple-import-sort',
         'jsx-a11y',
-        'react',
-        'react-hooks',
         '@typescript-eslint',
         'jest',
     ],

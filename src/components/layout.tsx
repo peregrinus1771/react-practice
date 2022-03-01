@@ -5,7 +5,7 @@ import { DefaultSeo } from 'next-seo'
 
 export const Layout = ({ children }: { children: ReactNode }) => {
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen transition-none duration-500">
+        <div className="flex min-h-screen flex-col items-center justify-center transition-none duration-500">
             <Head />
             <DefaultSeo {...SEO} />
             <Header />
@@ -14,4 +14,3 @@ export const Layout = ({ children }: { children: ReactNode }) => {
         </div>
     )
 }
-

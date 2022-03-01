@@ -8,7 +8,7 @@ export const Footer: React.VFC = () => {
             ? publishedYear
             : `${publishedYear} - ${thisYear}`
     return (
-        <footer className="flex justify-center items-center self-stretch pt-5 pb-2 mt-auto border-t-2">
+        <footer className="mt-auto flex items-center justify-center self-stretch border-t-2 pt-5 pb-2">
             <p>@{year} Flik</p>
         </footer>
     )

@@ -4,6 +4,9 @@ import { Query as Query0 } from '../../pages/search'
 
 // prettier-ignore
 export const pagesPath = {
+  $404: {
+    $url: (url?: { hash?: string }) => ({ pathname: '/404' as const, hash: url?.hash })
+  },
   article: {
     _post: (post: string | number) => ({
       $url: (url?: { hash?: string }) => ({ pathname: '/article/[post]' as const, query: { post }, hash: url?.hash })

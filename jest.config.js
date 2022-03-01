@@ -1,20 +1,22 @@
-module.exports = {
-    preset: 'ts-jest',
-    roots: ['<rootDir>/src'],
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+    // next.config.jsとテスト環境用の.envファイルが配置されたディレクトリをセット。基本は"./"で良い。
+    dir: './',
+})
+
+// Jestのカスタム設定を設置する場所。従来のプロパティはここで定義。
+const customJestConfig = {
+    // jest.setup.jsを作成する場合のみ定義。
+    // setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
     moduleNameMapper: {
-        // src ディレクトリをエイリアスのルートに設定
-        '^@/(.*)$': '<rootDir>/src/$1',
-        // test 時に CSS ファイルを読み込まないようにする設定
-        '\\.css$': '<rootDir>/node_modules/jest-css-modules',
-        '\\.(scss)$': 'identity-obj-proxy',
+        // aliasを定義 （tsconfig.jsonのcompilerOptions>pathsの定義に合わせる）
+        '^@/components/(.*)$': '<rootDir>/components/$1',
+        '^@/pages/(.*)$': '<rootDir>/pages/$1',
     },
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
-    globals: {
-        // test 時に TypeScript の設定を一部変更して実行する設定
-        'ts-jest': {
-            tsconfig: {
-                jsx: 'react',
-            },
-        },
-    },
+    testEnvironment: 'jest-environment-jsdom',
 }
+
+// createJestConfigを定義することによって、本ファイルで定義された設定がNext.jsの設定に反映されます
+module.exports = createJestConfig(customJestConfig)

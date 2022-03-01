@@ -2,31 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
     box-sizing: border-box;
-    }
+}
 body {
     margin: 0;
-    padding:0;
-    font-family: Arial,Helvetica, sans-serif;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
     /* color: ${(props) => props.theme.text.primary};
     background-color: ${(props) => props.theme.bg.primary}; */
 }
 
 @layer components {
     .text-light-color-primary {
-        @apply
+        @apply;
     }
     .text-light-color-secondary {
-        @apply
+        @apply;
     }
     .text-dark-color-primary {
-        @apply
+        @apply;
     }
     .text-dark-color-secondary {
-        @apply
+        @apply;
     }
     .bg-color-primary {
-        @apply
+        @apply;
     }
 }

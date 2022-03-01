@@ -1,17 +1,16 @@
 /* eslint-disable jest/expect-expect */
+function navigate(testId: string, path: string) {
+    cy.get(`[data-testid=${testId}]`).click({ multiple: true })
+    cy.url().should('include', path)
+}
+
 describe('Navigation in the top page', () => {
     beforeEach('Visit the top page', () => {
         cy.visit('/')
     })
 
-
-    function navigate(testId: string, path: string) {
-        cy.get(`[data-testid=${testId}]`).click({ multiple: true })
-        cy.url().should('include', path)
-    }
-
     describe('Header link', () => {
-    it('navigate to the top page', () => {
+        it('navigate to the top page', () => {
             navigate('header-home-link', '/')
         })
     })
@@ -34,7 +33,9 @@ describe('Navigation in the top page', () => {
 
         describe('Search link', () => {
             it('navigate to the search page', () => {
-                cy.get('[data-testid="search-input"]').type('React').click()
+                cy.get('[data-testid="search-input"]')
+                    .type('React')
+                    .type('{enter}')
                 cy.get('[data-testid="search-input"]').then(($input) => {
                     const query = $input.val()
 

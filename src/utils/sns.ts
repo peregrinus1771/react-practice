@@ -14,14 +14,8 @@ export const sns = {
         // hashtags=hashtag,hashtag2&
         // text=リンクテキスト"',
     },
-    facebook: {
-        shareLink: `http://www.facebook.com/share.php?u=${URL}`,
-    },
-    hatena: {
-        shareLink: `http://b.hatena.ne.jp/add?mode=confirm&url={URL}&title={ページのタイトル}`,
-    },
     feedly: {
-        shareLink: `https://feedly.com/i/subscription/feed/{URL}`,
+        shareLink: `https://feedly.com/i/subscription/feed/${URL}`,
     },
     rssFeed: {
         link: '',

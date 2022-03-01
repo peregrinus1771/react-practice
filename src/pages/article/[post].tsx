@@ -8,12 +8,8 @@ import { canonical } from '../../utils/seo'
 import { NextSeo } from 'next-seo'
 import * as scroll from 'react-scroll'
 // import 'highlight.js/styles/hybrid.css'
-import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
-dayjs.extend(localizedFormat)
 import 'highlight.js/styles/night-owl.css'
-import Link from 'next/link';
-import { pagesPath } from '../../lib/pathpida/$path'
+import { dateFormat } from '../../lib/dateFormat'
 
 interface Props {
     data: ArticleTypes
@@ -44,21 +40,14 @@ export default function Post({ data, parsedData }: Props) {
                 // }}
             />
             <div></div>
-            <Tag tag={data.tag} testId="article-tag-link"/>
+            <Tag tag={data.tag} testId="article-tag-link" />
             <div className="flex items-center">
-                <time>{dayjs(data.revisedAt).format('ll')}</time>
-                <time>{dayjs(data.publishedAt).format('ll')}</time>
+                <time>{dateFormat(data.revisedAt)}</time>
+                <time>{dateFormat(data.publishedAt)}</time>
                 <span>・</span>
                 {/* <span>{wpm} min read</span> */}
             </div>
             <h1 className="mx-0 mt-0 mb-3 font-thin md:mb-10">{data.title}</h1>
-            <a
-                href="http://www.facebook.com/share.php?u={}"
-                rel="noreferrer"
-                target="_blank"
-            >
-                good
-            </a>
 
             <Profile />
             <div>

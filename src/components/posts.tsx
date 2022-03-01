@@ -1,20 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link'
 import Image from 'next/image'
-import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
-dayjs.extend(localizedFormat)
 import { ArticleTypes } from '../types/types'
 import { pagesPath } from '../lib/pathpida/$path'
-import {Tag} from './index'
+import { Tag } from './index'
+import { dateFormat } from '../lib/dateFormat'
 
 interface Props {
     posts: ArticleTypes[]
     searchedWord?: string
 }
 
-
-export const Posts = ({ posts }:Props) => {
+export const Posts = ({ posts }: Props) => {
     return (
         <div>
             {posts.flatMap((p) => (
@@ -31,10 +28,12 @@ export const Posts = ({ posts }:Props) => {
                             /> */}
                     </div>
                     <div>
-                        <Tag tag={p.tag} testId="post-tag-link"/>
+                        <Tag tag={p.tag} testId="post-tag-link" />
                         <h3 className="m-0 hover:cursor-pointer	hover:no-underline">
                             <Link href={pagesPath.article._post(p.id).$url()}>
-                                <a data-testid="post-article-title-link">{p.title}</a>
+                                <a data-testid="post-article-title-link">
+                                    {p.title}
+                                </a>
                             </Link>
                         </h3>
                         <span>
@@ -49,7 +48,7 @@ export const Posts = ({ posts }:Props) => {
                             </Link>
                         </span>
                         <p className="">{p.synopsis}</p>
-                        <time>{dayjs(p.publishedAt).format('ll')}</time>
+                        <time>{dateFormat(p.publishedAt)}</time>
                         <p>
                             <Link href={pagesPath.article._post(p.id).$url()}>
                                 <a data-testid="post-article-readMore-link">

@@ -1,29 +1,42 @@
-import { sns } from '../utils/sns'
-import { SiHatenabookmark, SiFeedly } from 'react-icons/si'
-import { IoLogoTwitter, IoLogoFacebook, IoLogoRss } from 'react-icons/io5'
+import { IoLogoRss } from 'react-icons/io5'
+import {
+    FacebookIcon,
+    FacebookShareButton,
+    TwitterIcon,
+    TwitterShareButton,
+} from 'react-share'
+import { ArticleTypes } from '../types/types'
 
-export const Share = () => {
+interface Props {
+    post: ArticleTypes
+}
+
+export const Share = ({ post }: Props) => {
+    const hashtags = post.tag.map((t) => t.name)
+
     return (
         <>
             <ul>
+                <li>
+                    <TwitterShareButton
+                        // url={`${baseURL}/article/${post.id}`}
+                        url={window.location.href}
+                        title={post.title}
+                        hashtags={hashtags}
+                    >
+                        <TwitterIcon size={32} round />
+                    </TwitterShareButton>
+                </li>
+                <li>
+                    <FacebookShareButton
+                        url={window.location.href}
+                        //title
+                        quote={post.title}
+                    >
+                        <FacebookIcon size={32} round />
+                    </FacebookShareButton>
+                </li>
                 {/* <li>
-                    <a href={sns.twitter.shareLink}>
-                        <IoLogoTwitter />
-                        tweet
-                    </a>
-                </li> */}
-                <li>
-                    <a href={sns.facebook.shareLink}>
-                        <IoLogoFacebook />
-                        share
-                    </a>
-                </li>
-                <li>
-                    <a href={sns.hatena.shareLink}>
-                        <SiHatenabookmark />
-                    </a>
-                </li>
-                <li>
                     <a href={sns.feedly.shareLink}>
                         <SiFeedly />
                     </a>
@@ -32,7 +45,7 @@ export const Share = () => {
                     <a href={sns.rssFeed.link}>
                         <IoLogoRss />
                     </a>
-                </li>
+                </li> */}
             </ul>
         </>
     )

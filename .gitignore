@@ -31,8 +31,12 @@ yarn-error.log*
 .env.production.local
 
 
-/next-env.d.ts
+# lock files
+yarn.lock
+package-lock.json
 
+
+#vscode
 /.vscode
 
 # storybook
@@ -40,7 +44,18 @@ storybook-static
 
 # cypress
 cypress/screenshots
-cypress/videos
 
 # vercel
 .vercel
+
+# reg-suit
+.reg
+
+#terraform
+/terraform/env
+.terraform
+*.tfstate
+*.tfstate.backup
+
+# Sentry
+.sentryclirc

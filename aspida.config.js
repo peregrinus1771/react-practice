@@ -1,3 +1,3 @@
-module.exports ={
-    "input": "src/lib/aspida"
+module.exports = {
+    input: 'src/lib/aspida',
 }

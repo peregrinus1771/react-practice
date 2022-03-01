@@ -12,5 +12,5 @@ export const usePaginatedPosts = (posts: ArticleTypes[]) => {
 
     const paginate = (pageNumber: number): void => setCurrentPage(pageNumber)
 
-    return { currentPosts, postsPerPage, totalPosts, paginate }
+    return { currentPosts, currentPage, postsPerPage, totalPosts, paginate }
 }

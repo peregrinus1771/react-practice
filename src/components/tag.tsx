@@ -14,7 +14,9 @@ export const Tag = ({ tag, testId }: Props) => {
             <ul>
                 {tag.map((t) => (
                     <li key={t.id}>
-                        <Link href={pagesPath.tag._tag(t.name).$url()}><a data-testid={testId}>{t.name}</a></Link>
+                        <Link href={pagesPath.tag._tag(t.name).$url()}>
+                            <a data-testid={testId}>{t.name}</a>
+                        </Link>
                     </li>
                 ))}
             </ul>

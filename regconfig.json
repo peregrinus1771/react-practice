@@ -1,0 +1,20 @@
+{
+    "core": {
+        "workingDir": ".reg",
+        "actualDir": "cypress/screenshots",
+        "thresholdRate": 0,
+        "ximgdiff": {
+            "invocationType": "client"
+        }
+    },
+    "plugins": {
+        "reg-keygen-git-hash-plugin": true,
+        "reg-notify-github-plugin": {
+            "prComment": true,
+            "prCommentBehavior": "default",
+            "clientId": "${process.env.CLIENT_ID}"
+        },
+        "reg-publish-s3-plugin": {
+            "bucketName": "${process.env.BUCKET_NAME}"        }
+    }
+}

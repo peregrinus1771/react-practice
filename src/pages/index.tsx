@@ -6,13 +6,13 @@ import { getArticle } from '../utils/post'
 import { usePaginatedPosts } from '../hooks/usePaginatedPosts'
 
 interface Props {
-    posts: ArticleTypes[]
-    // categories: CategoryTypes[]
-    // tags: TagTypes[]
+    data: ArticleTypes[]
+    categories: CategoryTypes[]
+    tags: TagTypes[]
 }
 
-export default function Home({ posts }: Props) {
-    const { currentPosts, ...pagination } = usePaginatedPosts(posts)
+export default function Home({ data }: Props) {
+    const { currentPosts, ...pagination } = usePaginatedPosts(data)
 
     return (
         <div className="w-screen max-w-4xl grow p-3 md:w-10/12">
@@ -27,8 +27,8 @@ export default function Home({ posts }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const posts = await getArticle
+    const data = await getArticle
     return {
-        props: { posts: posts.contents },
+        props: { data: data.contents },
     }
 }

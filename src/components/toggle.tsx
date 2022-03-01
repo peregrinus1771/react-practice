@@ -1,16 +1,25 @@
 import { IoSunny, IoMoon } from 'react-icons/io5'
-import {useTheme} from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { useCallback, useEffect, useState } from 'react'
 export const Toggle: React.VFC = () => {
     const { theme, setTheme } = useTheme()
-    const [ isMounted, setIsMounted] = useState(false)
+    const [isMounted, setIsMounted] = useState(false)
     useEffect(() => setIsMounted(true), [])
+
+    const handleOnClick = useCallback(() => {
+        setTheme(theme === 'light' ? 'dark' : 'light')
+    }, [setTheme, theme])
+
+    console.log('isMounted:', isMounted)
+    console.log('handleOnClick:', handleOnClick)
+
     return (
         <>
-            <button className="flex justify-center items-center p-1 w-8 h-8 bg-none border-none focus:outline-none opacity-60 hover:opacity-100 hover:cursor-pointer"  onClick={()=>setTheme(
-        theme === 'light' ? 'dark' : 'light'
-            )}>
-                {isMounted&&theme === 'light' ? (
+            <button
+                className="flex h-8 w-8 items-center justify-center border-none bg-none p-1 opacity-60 hover:cursor-pointer hover:opacity-100 focus:outline-none"
+                onClick={handleOnClick}
+            >
+                {isMounted && theme === 'light' ? (
                     <IoSunny size={32} />
                 ) : (
                     <IoMoon size={32} />
